@@ -9,13 +9,13 @@ public class LocalizeMe : MonoBehaviour {
 
 	void Start () {
         text = GetComponent<Text>();
-        text.text = Game.settings.Localization;
+        text.text = Game.localization["settings"];
         Game.settings.SettingsChanged += SetText;
     }
 
     void SetText()
     {
-        //text.text = Game.settings.Localization;
+        text.text = Game.localization["settings"];
     }
 
     void OnDestroy()

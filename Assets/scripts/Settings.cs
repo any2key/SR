@@ -9,12 +9,30 @@ public class Settings
     private static string path = Path.Combine(IO._directoryPath, "s.bp");
     private static Settings instance;
     private string _localization;
+    private GraphicSetttings _quality;
+    private AudioSetttings _audio;
     public delegate void SettingsChangedHandler();
-    public  event SettingsChangedHandler SettingsChanged;
+    public event SettingsChangedHandler SettingsChanged;
 
     public Settings()
     {
-        _localization = "ctor  Value";
+        _localization = "ru-RU";
+        _quality = new GraphicSetttings()
+        {
+            AnisotropicFiltering = AnisotropicFiltering.Enable,
+            AntiAliasing = 8,
+            QLevel = QualityLevel.Fantastic,
+            Resolution = new Resolution() { height = Screen.height, width = Screen.width },
+            ShadowQuality = ShadowQuality.All,
+            ShadowResolution = ShadowResolution.VeryHigh,
+            TextRes = 0,
+            vSync = 1
+        };
+        _audio = new AudioSetttings()
+        {
+            Music=50,
+            Sound=50
+        };
         SettingsChanged += Write;
     }
 
@@ -24,10 +42,6 @@ public class Settings
         {
             instance = new Settings();
             IO.GetInstance(ref instance, path);
-            //if (instance == null)
-            //{
-            //    return new Settings();
-            //}
             return instance;
         }
         return instance;
@@ -44,6 +58,16 @@ public class Settings
         }
     }
 
+    public GraphicSetttings Quality
+    {
+        get { return _quality; }
+        set
+        {
+            _quality = value;
+            if (SettingsChanged != null)
+                SettingsChanged();
+        }
+    }
 
     private void Write()
     {

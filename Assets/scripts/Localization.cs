@@ -5,19 +5,45 @@ using Any2key.Game.Api;
 using System.Linq;
 using System.IO;
 
-public class Localization  {
-    private string path = Path.Combine(IO._directoryPath, @"Files\Localization\Reflection\"+Game.settings.Localization+".xml");
+public class Localization {
+    private string path = Path.Combine(IO._directoryPath, @"Files\Localization\Reflection\" + Game.settings.Localization + ".xml");
     private List<Dictionary> dictionary;
-    public string  this[string key]
+    private static Localization instance;
+    public Localization()
+    {
+        string cryptValue = Resources.Load<TextAsset>(Game.settings.Localization).text;
+        if(string.IsNullOrEmpty(cryptValue))
+            cryptValue = Resources.Load<TextAsset>("en-EN").text;
+
+        string xmlValue = Crypto.DecryptStringAES(cryptValue, "Let the force be with you");
+        dictionary = IO.FromXml<List<Dictionary>>(xmlValue);
+        Game.settings.SettingsChanged += SetLocalization;
+    }
+
+    public string this[string key]
     {
         get
-        { 
-           return string.IsNullOrEmpty(dictionary.FirstOrDefault(e => e.key == key).value)? dictionary.FirstOrDefault(e => e.key == key).value:"Undefined";
+        {
+            return string.IsNullOrEmpty(dictionary.FirstOrDefault(e => e.key == key).value) ? "Undefined": dictionary.FirstOrDefault(e => e.key == key).value;
         }
     }
 
-    public Localization()
+    public static Localization GetLocalization()
     {
+        if (instance == null)
+        {
+            return new Localization();
+        }
+        return instance;
+    }
 
+    void SetLocalization()
+    {
+        string cryptValue = Resources.Load<TextAsset>(Game.settings.Localization).text;
+        if (string.IsNullOrEmpty(cryptValue))
+            cryptValue = Resources.Load<TextAsset>("en-EN").text;
+
+        string xmlValue = Crypto.DecryptStringAES(cryptValue, "Let the force be with you");
+        dictionary = IO.FromXml<List<Dictionary>>(xmlValue);
     }
 }
