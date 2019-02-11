@@ -25,8 +25,6 @@ public class Game : MonoBehaviour {
     }
     void Start()
     {
-        Debug.Log(settings.Localization);
-        Debug.Log(settings.Quality.Resolution);
     }
   
 }

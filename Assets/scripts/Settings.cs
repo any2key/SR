@@ -7,10 +7,15 @@ using System.IO;
 public class Settings
 {
     private static string path = Path.Combine(IO._directoryPath, "s.bp");
+
     private static Settings instance;
+
     private string _localization;
     private GraphicSetttings _quality;
     private AudioSetttings _audio;
+    private InputSettings _input;
+
+
     public delegate void SettingsChangedHandler();
     public event SettingsChangedHandler SettingsChanged;
 
@@ -33,6 +38,7 @@ public class Settings
             Music=50,
             Sound=50
         };
+        _input = new InputSettings();
         SettingsChanged += Write;
     }
 
@@ -64,6 +70,28 @@ public class Settings
         set
         {
             _quality = value;
+            if (SettingsChanged != null)
+                SettingsChanged();
+        }
+    }
+
+    public AudioSetttings Audio
+    {
+        get { return _audio; }
+        set
+        {
+            _audio = value;
+            if (SettingsChanged != null)
+                SettingsChanged();
+        }
+    }
+
+    public InputSettings Input
+    {
+        get { return _input; }
+        set
+        {
+            _input = value;
             if (SettingsChanged != null)
                 SettingsChanged();
         }
