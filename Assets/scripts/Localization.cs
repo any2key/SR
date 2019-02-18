@@ -6,7 +6,7 @@ using System.Linq;
 using System.IO;
 
 public class Localization {
-    private string path = Path.Combine(IO._directoryPath, @"Files\Localization\Reflection\" + Game.settings.Localization + ".xml");
+   // private string path = Path.Combine(IO._directoryPath, @"Files\Localization\Reflection\" + Game.settings.Localization + ".xml");
     private List<Dictionary> dictionary;
     private static Localization instance;
     public Localization()
@@ -32,7 +32,7 @@ public class Localization {
     {
         if (instance == null)
         {
-            return new Localization();
+           instance= new Localization();
         }
         return instance;
     }
