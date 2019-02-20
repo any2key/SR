@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class PrefabPool : MonoBehaviour {
+public class PrefabPool : MonoBehaviour
+{
     [SerializeField]
     private List<CharacterObject> _availableCharacters;
     public static List<CharacterObject> AvailableCharacters;
@@ -12,11 +13,10 @@ public class PrefabPool : MonoBehaviour {
     {
         AvailableCharacters = _availableCharacters;
     }
-    public CharacterObject this[string key]
+
+
+    public static CharacterObject GetCharacter(string prefabName)
     {
-        get
-        {
-            return _availableCharacters.FirstOrDefault(e => e._name == key);
-        }
+        return AvailableCharacters.FirstOrDefault(e => e.prefabName == prefabName);
     }
 }

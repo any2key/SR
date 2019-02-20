@@ -20,7 +20,7 @@ public class GameState
     {
         _profiles = new List<Profile>();
         GameStateChanged += Write;
-        Profile.ProfileStateChanged += Write;
+       // Profile.ProfileStateChanged += Write;
     }
 
 
@@ -44,9 +44,11 @@ public class GameState
     public void AddProfile(Profile profile)
     {
         if (_profiles.Count < 3)
+        {
             _profiles.Add(profile);
+            GameStateChanged();
+        }
 
-        GameStateChanged();
     }
 
     public void RemoveProfile(Guid guid)
@@ -60,6 +62,6 @@ public class GameState
     private void Write()
     {
         if (GameStateChanged != null)
-            IO.WriteFile(path, instance.ToXML());
+            IO.WriteFile(path, GetState().ToXML());
     }
 }
