@@ -12,6 +12,8 @@ public class SelectSceneManager : MonoBehaviour
     public List<Profile> ProfilesToShow = new List<Profile>();
     public GameObject prefab;
 
+    public Text Description;
+
     public static Profile CurrentProfile;
 
     void Awake()
@@ -29,16 +31,17 @@ public class SelectSceneManager : MonoBehaviour
 
     void Update()
     {
+
         if (Input.GetKeyDown(KeyCode.A))
         {
-            //Game.gameState.AddProfile(new Profile() { Character = PrefabPool.GetCharacter("Englishman_Tony").character });
-            //Game.gameState.AddProfile(new Profile() { Character = PrefabPool.GetCharacter("Redneck").character });
-            //Game.gameState.AddProfile(new Profile() { Character = PrefabPool.GetCharacter("Redneck_tutorial").character });
+            Game.gameState.AddProfile(new Profile() { Character = PrefabPool.GetCharacter("Englishman_Tony").character });
+            Game.gameState.AddProfile(new Profile() { Character = PrefabPool.GetCharacter("Redneck").character });
+            Game.gameState.AddProfile(new Profile() { Character = PrefabPool.GetCharacter("Redneck_tutorial").character });
             //InstantiatePrefab();
             counter--;
             if (counter < 0)
                 counter = ProfilesToShow.Count - 1;
-            CurrentProfile = ProfilesToShow[counter];
+            CurrentProfile = ProfilesToShow[0];
             InstantiatePrefab();
         }
         else if (Input.GetKeyDown(KeyCode.D))
@@ -79,8 +82,8 @@ public class SelectSceneManager : MonoBehaviour
 
     void OnDestroy()
     {
-        Game.gameState.GameStateChanged += GameStateChange;
-        Game.gameState.GameStateChanged += SetProfilesToShow;
+        Game.gameState.GameStateChanged -= GameStateChange;
+        Game.gameState.GameStateChanged -= SetProfilesToShow;
     }
 
     void InstantiatePrefab()
@@ -88,5 +91,6 @@ public class SelectSceneManager : MonoBehaviour
         Debug.Log("Instantiate!");
         Destroy(prefab);
         prefab = Instantiate(PrefabPool.GetCharacter(CurrentProfile.Character.PrefabName).prefab, new Vector3(spawn.transform.position.x, spawn.transform.position.y, spawn.transform.position.z), spawn.rotation) as GameObject;
+        Description.text = CurrentProfile.Character.Name;
     }
 }

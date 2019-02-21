@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Any2key.Game.Api;
+//using Any2key.Game.Api;
 using System.IO;
+using API;
 
 public class Settings
 {

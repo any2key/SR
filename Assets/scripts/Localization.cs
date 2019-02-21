@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Any2key.Game.Api;
+//using Any2key.Game.Api;
 using System.Linq;
 using System.IO;
+using API;
 
 public class Localization {
    // private string path = Path.Combine(IO._directoryPath, @"Files\Localization\Reflection\" + Game.settings.Localization + ".xml");

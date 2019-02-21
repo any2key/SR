@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Any2key.Game.Api;
 using UnityEngine.EventSystems;
 using System;
+using API;
 
 public class Game : MonoBehaviour
 {
@@ -12,20 +12,31 @@ public class Game : MonoBehaviour
     public static Settings settings;
     public static Localization localization;
     public static GameState gameState;
+
+    public static string Folder;
+    public static int LogKeepDays;
+    public static int LogLevel;
+    public static string LogFolder;
+
     void Awake()
     {
-        Any2key.Game.Api.Logger.Log(LogLevel.Debug, "Начало Awake() в Game");
+        Folder = GetComponent<Properties>().Folder;
+        LogKeepDays = GetComponent<Properties>().LogKeepDays;
+        LogLevel = GetComponent<Properties>().LogLevel;
+        LogFolder = GetComponent<Properties>().LogFolder;
+
+        API.Logger.Log(API.LogLevel.Debug, "Начало Awake() в Game");
         DontDestroyOnLoad(gameObject);
         isInit = false;
-        Any2key.Game.Api.Logger.Log(LogLevel.Debug, "Пытаюсь проинициализировать настройки");
+        API.Logger.Log(API.LogLevel.Debug, "Пытаюсь проинициализировать настройки");
         settings = Settings.GetSettings();
-        Any2key.Game.Api.Logger.Log(LogLevel.Debug, "Настройки проинициализированы: " + settings.ToXML());
-        Any2key.Game.Api.Logger.Log(LogLevel.Debug, "Пытаюсь проинициализировать локализацию");
+        API.Logger.Log(API.LogLevel.Debug, "Настройки проинициализированы: " + settings.ToXML());
+        API.Logger.Log(API.LogLevel.Debug, "Пытаюсь проинициализировать локализацию");
         localization = Localization.GetLocalization();
-        Any2key.Game.Api.Logger.Log(LogLevel.Debug, "Локализация проинициализирована: " + localization.ToXML());
-        Any2key.Game.Api.Logger.Log(LogLevel.Debug, "Пытаюсь проинициализировать состояние игры");
+        API.Logger.Log(API.LogLevel.Debug, "Локализация проинициализирована: " + localization.ToXML());
+        API.Logger.Log(API.LogLevel.Debug, "Пытаюсь проинициализировать состояние игры");
         gameState = GameState.GetState();
-        Any2key.Game.Api.Logger.Log(LogLevel.Debug, "Состояние игры проинициализировано: " + gameState.ToXML());
+        API.Logger.Log(API.LogLevel.Debug, "Состояние игры проинициализировано: " + gameState.ToXML());
         isInit = true;
     }
     void Start()

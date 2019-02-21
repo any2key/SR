@@ -350,6 +350,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 844360004}
+  - component: {fileID: 844360005}
   - component: {fileID: 844360003}
   m_Layer: 0
   m_Name: Game
@@ -382,6 +383,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &844360005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 844360002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecc101cf97e8ad5448a178c43ed371d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Folder: SkyReflection
+  LogKeepDays: 30
+  LogLevel: 1
+  LogFolder: Logs
 --- !u!1 &1306448566
 GameObject:
   m_ObjectHideFlags: 0
@@ -422,10 +438,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49b42aa877be2d44b86d847416087db4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 1950772517127608, guid: daf8bad7b3726814bb194d9994ef6172, type: 2}
+  prefab: {fileID: 1628025310928154, guid: e1def23d8eecb834a8c286f1ec761164, type: 2}
   prefabName: Englishman_Tony
-  _name: Englishman_Tony_key
-  _descriptionKey: Englishman_tony_description_key
+  _name: Englishman_Tony_name
+  _descriptionKey: Englishman_tony_description
   _armor: 5
   _weapon: 3
   _rof: 2
@@ -473,8 +489,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 1681543616196022, guid: d3cc46cd7f402184cb64448cceabb165, type: 2}
   prefabName: Redneck_tutorial
-  _name: Redneck_tutorial_key
-  _descriptionKey: Redneck_tutorial_description_key
+  _name: Redneck_tutorial_name
+  _descriptionKey: Redneck_tutorial_description
   _armor: 2
   _weapon: 3
   _rof: 3
@@ -571,8 +587,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 1946191602059732, guid: 1e9d53813766ad446b2b23bbf4e13c7c, type: 2}
   prefabName: Redneck
-  _name: Redneck_key
-  _descriptionKey: Redneck_description_key
+  _name: Redneck_name
+  _descriptionKey: Redneck_description
   _armor: 5
   _weapon: 1
   _rof: 4
